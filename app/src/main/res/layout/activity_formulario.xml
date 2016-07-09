@@ -10,6 +10,45 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     >
 
+    <EditText
+        android:id="@+id/formulario_nome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:hint="Nome"/>
 
+    <EditText
+        android:id="@+id/formulario_telefone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="phone"
+        android:hint="Telefone"/>
+
+    <EditText
+        android:id="@+id/formulario_endereco"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Endereço"/>
+
+    <EditText
+        android:id="@+id/formulario_site"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textUri"
+        android:hint="Site"/>
+
+    <RatingBar
+        android:numStars="5"
+        android:max="10"
+        android:layout_gravity="center"
+        android:id="@+id/formulario_nota"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/botao_salvar"
+        android:text="Salvar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>
