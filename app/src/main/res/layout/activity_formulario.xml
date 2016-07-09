@@ -42,7 +42,19 @@
             android:hint="Site"
             android:inputType="textUri"/>
 
+        <RatingBar
+            android:id="@+id/formulario_nota"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:max="10"
+            android:numStars="5"/>
 
+        <Button
+            android:id="@+id/botao_salvar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Salvar"/>
 
     </LinearLayout>
 </ScrollView>

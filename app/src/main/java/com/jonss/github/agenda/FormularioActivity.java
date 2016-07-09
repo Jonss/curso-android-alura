@@ -13,5 +13,14 @@ public class FormularioActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulario);
 
+
+        Button botaoSalvar = (Button) findViewById(R.id.botao_salvar);
+        botaoSalvar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(FormularioActivity.this, "Aluno salvo", Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 }
