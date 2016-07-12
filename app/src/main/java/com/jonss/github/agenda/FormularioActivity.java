@@ -5,16 +5,21 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
+import com.jonss.github.agenda.helper.FormularioHelper;
+import com.jonss.github.agenda.model.Aluno;
+
 public class FormularioActivity extends AppCompatActivity {
+
+    private FormularioHelper mFormularioHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulario);
+
+        mFormularioHelper = new FormularioHelper(this);
     }
 
 
@@ -29,7 +34,8 @@ public class FormularioActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_formulario_ok:
-                Toast.makeText(this, "Aluno salvo", Toast.LENGTH_SHORT).show();
+                Aluno aluno = mFormularioHelper.getAluno();
+                Toast.makeText(this, "Aluno " + aluno.getNome() + " salvo " + aluno.getNota(), Toast.LENGTH_SHORT).show();
                 finish();
                 break;
         }
