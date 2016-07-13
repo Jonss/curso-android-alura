@@ -1,7 +1,7 @@
 package com.jonss.github.agenda;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -39,6 +39,7 @@ public class FormularioActivity extends AppCompatActivity {
                 Toast.makeText(this, "Aluno " + aluno.getNome() + " salvo " + aluno.getNota(), Toast.LENGTH_SHORT).show();
 
                 AlunoDao alunoDao = new AlunoDao(this);
+                alunoDao.create(aluno);
                 finish();
                 break;
         }
