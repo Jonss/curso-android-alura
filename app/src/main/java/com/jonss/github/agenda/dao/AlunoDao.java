@@ -2,10 +2,14 @@ package com.jonss.github.agenda.dao;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.jonss.github.agenda.model.Aluno;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by neuromancer on 12/07/16.
@@ -51,4 +55,20 @@ public class AlunoDao extends SQLiteOpenHelper {
         db.insert(TABLE, null, values);
     }
 
+    public List<Aluno> getAll() {
+        String sql = "SELECT * from " + TABLE;
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery(sql, null);
+        List<Aluno> alunos = new ArrayList<>();
+        while(cursor.moveToNext()) {
+            Aluno aluno = new Aluno();
+            aluno.setId(cursor.getLong(cursor.getColumnIndex("id")));
+            aluno.setNome(cursor.getString(cursor.getColumnIndex("nome")));
+            aluno.setEndereco(cursor.getString(cursor.getColumnIndex("endereco")));
+            aluno.setTelefone(cursor.getString(cursor.getColumnIndex("telefone")));
+            aluno.setNota(cursor.getDouble(cursor.getColumnIndex("nota")));
+            alunos.add(aluno);
+        }
+        return alunos;
+    }
 }

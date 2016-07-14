@@ -1,19 +1,21 @@
 package com.jonss.github.agenda.model;
 
+import android.util.Log;
+
 public class Aluno {
 
-    private Integer id;
+    private Long id;
     private String nome;
     private String endereco;
     private String site;
     private String telefone;
     private Double mNota;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -57,4 +59,10 @@ public class Aluno {
     public Double getNota() {
         return mNota;
     }
+
+    @Override
+    public String toString() {
+        return id + " - " + nome;
+    }
+
 }
