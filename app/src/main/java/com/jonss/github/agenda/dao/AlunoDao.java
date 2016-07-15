@@ -67,6 +67,7 @@ public class AlunoDao extends SQLiteOpenHelper {
             aluno.setEndereco(cursor.getString(cursor.getColumnIndex("endereco")));
             aluno.setTelefone(cursor.getString(cursor.getColumnIndex("telefone")));
             aluno.setNota(cursor.getDouble(cursor.getColumnIndex("nota")));
+
             alunos.add(aluno);
         }
         return alunos;

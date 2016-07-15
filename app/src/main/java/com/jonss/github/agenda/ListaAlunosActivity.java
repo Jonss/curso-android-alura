@@ -11,7 +11,6 @@ import android.widget.ListView;
 import com.jonss.github.agenda.dao.AlunoDao;
 import com.jonss.github.agenda.model.Aluno;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ListaAlunosActivity extends AppCompatActivity {
@@ -20,13 +19,6 @@ public class ListaAlunosActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_alunos);
-
-        AlunoDao alunoDao = new AlunoDao(this);
-        List<Aluno> alunos = alunoDao.getAll();
-
-        ListView listView = (ListView) findViewById(R.id.lista_alunos);
-        ArrayAdapter<Aluno> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, alunos);
-        listView.setAdapter(adapter);
 
         Button novoAlunoButton = (Button) findViewById(R.id.novo_aluno);
         novoAlunoButton.setOnClickListener(new View.OnClickListener() {
@@ -39,4 +31,14 @@ public class ListaAlunosActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        AlunoDao alunoDao = new AlunoDao(this);
+        List<Aluno> alunos = alunoDao.getAll();
+
+        ListView listView = (ListView) findViewById(R.id.lista_alunos);
+        ArrayAdapter<Aluno> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, alunos);
+        listView.setAdapter(adapter);
+    }
 }
