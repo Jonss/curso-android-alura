@@ -1,5 +1,6 @@
 package com.jonss.github.agenda;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -21,6 +22,13 @@ public class FormularioActivity extends AppCompatActivity {
         setContentView(R.layout.activity_formulario);
 
         mFormularioHelper = new FormularioHelper(this);
+
+        Intent intent = getIntent();
+        Aluno aluno = (Aluno) intent.getSerializableExtra("aluno");
+        if(aluno != null) {
+            mFormularioHelper.setAluno(aluno);
+        }
+
     }
 
 
@@ -36,13 +44,18 @@ public class FormularioActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.menu_formulario_ok:
                 Aluno aluno = mFormularioHelper.getAluno();
-                Toast.makeText(this, "Aluno " + aluno.getNome() + " salvo " + aluno.getNota(), Toast.LENGTH_SHORT).show();
-
                 AlunoDao alunoDao = new AlunoDao(this);
-                alunoDao.create(aluno);
+                if(aluno.getId() == null) {
+                    alunoDao.create(aluno);
+                } else {
+                    alunoDao.update(aluno);
+                }
+                alunoDao.close();
+                Toast.makeText(this, "Aluno " + aluno.getNome() + " salvo " + aluno.getNota(), Toast.LENGTH_SHORT).show();
                 finish();
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
+
 }

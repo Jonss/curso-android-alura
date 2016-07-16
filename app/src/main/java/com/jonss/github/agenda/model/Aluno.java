@@ -1,8 +1,8 @@
 package com.jonss.github.agenda.model;
 
-import android.util.Log;
+import java.io.Serializable;
 
-public class Aluno {
+public class Aluno implements Serializable{
 
     private Long id;
     private String nome;
@@ -50,7 +50,6 @@ public class Aluno {
     public void setSite(String site) {
         this.site = site;
     }
-
 
     public void setNota(Double nota) {
         mNota = nota;

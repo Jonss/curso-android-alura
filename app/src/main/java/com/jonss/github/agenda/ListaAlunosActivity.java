@@ -28,6 +28,15 @@ public class ListaAlunosActivity extends AppCompatActivity {
         setContentView(R.layout.activity_lista_alunos);
 
         listView = (ListView) findViewById(R.id.lista_alunos);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> lista, View item, int position, long id) {
+                Aluno aluno = (Aluno) lista.getItemAtPosition(position);
+                Intent intent = new Intent(ListaAlunosActivity.this, FormularioActivity.class);
+                intent.putExtra("aluno", aluno);
+                startActivity(intent);
+            }
+        });
 
         Button novoAlunoButton = (Button) findViewById(R.id.novo_aluno);
         novoAlunoButton.setOnClickListener(new View.OnClickListener() {
@@ -49,7 +58,6 @@ public class ListaAlunosActivity extends AppCompatActivity {
 
     private void carregaLista() {
         List<Aluno> alunos = alunoDao.getAll();
-
         ArrayAdapter<Aluno> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, alunos);
         listView.setAdapter(adapter);
     }
