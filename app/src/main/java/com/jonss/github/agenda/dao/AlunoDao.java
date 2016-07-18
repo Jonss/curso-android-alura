@@ -49,6 +49,7 @@ public class AlunoDao extends SQLiteOpenHelper {
         ContentValues values = getAlunoContentValues(aluno);
 
         db.insert(TABLE, null, values);
+        this.close();
     }
 
     @NonNull
@@ -78,6 +79,7 @@ public class AlunoDao extends SQLiteOpenHelper {
 
             alunos.add(aluno);
         }
+        cursor.close();
         return alunos;
     }
 
@@ -86,6 +88,7 @@ public class AlunoDao extends SQLiteOpenHelper {
 
         String[] params = {aluno.getId().toString()};
         db.delete(TABLE, "id = ?", params);
+        this.close();
     }
 
     public void update(Aluno aluno) {
@@ -95,7 +98,9 @@ public class AlunoDao extends SQLiteOpenHelper {
         String[] params = {aluno.getId().toString()};
 
         db.update(TABLE, values, "id = ?", params);
+        this.close();
     }
+
 
 }
 

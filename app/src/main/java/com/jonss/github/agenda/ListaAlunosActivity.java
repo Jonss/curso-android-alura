@@ -1,7 +1,9 @@
 package com.jonss.github.agenda;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.ContextMenu;
 import android.view.MenuItem;
@@ -65,17 +67,44 @@ public class ListaAlunosActivity extends AppCompatActivity {
 
     @Override
     public void onCreateContextMenu(final ContextMenu menu, View v, final ContextMenu.ContextMenuInfo menuInfo) {
-        MenuItem deletar = menu.add("deletar");
-        deletar.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
-                Aluno aluno = (Aluno) listView.getItemAtPosition(info.position);
+        getMenuInflater().inflate(R.menu.context_formulario_menu, menu);
+        MenuItem item = menu.findItem(R.id.menu_share);
+    }
+
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        Aluno aluno = (Aluno) listView.getItemAtPosition(info.position);
+
+        switch (item.getItemId()) {
+            case R.id.menu_visitar_site:
+                String site = aluno.getSite();
+                if (!site.startsWith("http://")) {
+                    site = "http://" + site;
+                }
+                Intent intentSite = new Intent(Intent.ACTION_VIEW);
+                intentSite.setData(Uri.parse(site));
+                item.setIntent(intentSite);
+                break;
+            case R.id.menu_deletar:
                 alunoDao.deleta(aluno);
-                Toast.makeText(ListaAlunosActivity.this, aluno.getNome() + " deletado", Toast.LENGTH_SHORT).show();
                 carregaLista();
-                return false;
-            }
-        });
+                Toast.makeText(this, "Aluno " + aluno.getNome() + "deletado", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.menu_share:
+                startActivity(sendSiteFrom(aluno));
+                break;
+        }
+        return super.onContextItemSelected(item);
+    }
+
+    @NonNull
+    private Intent sendSiteFrom(Aluno aluno) {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_TEXT, aluno.getSite());
+        return intent;
     }
 }
