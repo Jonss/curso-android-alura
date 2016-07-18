@@ -15,4 +15,11 @@
         android:title="Share"
         android:actionProviderClass="android.widget.ShareActionProvider"
         />
+    <item
+        android:id="@+id/menu_ver_no_mapa"
+        android:title="Visualizar no Mapa"/>
+
+    <item
+        android:id="@+id/menu_enviar_sms"
+        android:title="Enviar sms"/>
 </menu>

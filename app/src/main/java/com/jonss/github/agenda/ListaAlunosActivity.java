@@ -95,6 +95,16 @@ public class ListaAlunosActivity extends AppCompatActivity {
             case R.id.menu_share:
                 startActivity(sendSiteFrom(aluno));
                 break;
+            case R.id.menu_ver_no_mapa:
+                Intent intentMapa = new Intent(Intent.ACTION_VIEW);
+                intentMapa.setData(Uri.parse("geo=0,0?q=" + aluno.getEndereco()));
+                item.setIntent(intentMapa);
+                break;
+            case R.id.menu_enviar_sms:
+                Intent intentSms = new Intent(Intent.ACTION_VIEW);
+                intentSms.setData(Uri.parse("sms:" + aluno.getTelefone()));
+                item.setIntent(intentSms);
+                break;
         }
         return super.onContextItemSelected(item);
     }

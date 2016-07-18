@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Agenda.iml" filepath="$PROJECT_DIR$/Agenda.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/curso-android-alura.iml" filepath="$PROJECT_DIR$/curso-android-alura.iml" />
     </modules>
   </component>
 </project>
