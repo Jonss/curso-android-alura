@@ -1,9 +1,12 @@
 package com.jonss.github.agenda;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.ContextMenu;
 import android.view.MenuItem;
@@ -23,6 +26,7 @@ public class ListaAlunosActivity extends AppCompatActivity {
 
     private ListView listView;
     private AlunoDao alunoDao = new AlunoDao(this);
+    private Aluno aluno;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +79,7 @@ public class ListaAlunosActivity extends AppCompatActivity {
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-        Aluno aluno = (Aluno) listView.getItemAtPosition(info.position);
+        aluno = (Aluno) listView.getItemAtPosition(info.position);
 
         switch (item.getItemId()) {
             case R.id.menu_visitar_site:
@@ -104,6 +108,24 @@ public class ListaAlunosActivity extends AppCompatActivity {
                 Intent intentSms = new Intent(Intent.ACTION_VIEW);
                 intentSms.setData(Uri.parse("sms:" + aluno.getTelefone()));
                 item.setIntent(intentSms);
+                break;
+            case R.id.menu_ligar:
+                item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        if (ActivityCompat.checkSelfPermission(ListaAlunosActivity.this, Manifest.permission.CALL_PHONE)
+                                != PackageManager.PERMISSION_GRANTED) {
+                            ActivityCompat.requestPermissions(ListaAlunosActivity.this,
+                                    new String[]{Manifest.permission.CALL_PHONE}, 123);
+                        } else {
+                            Intent intentLigar = new Intent(Intent.ACTION_CALL);
+                            intentLigar.setData(Uri.parse("tel:" + aluno.getTelefone()));
+                            startActivity(intentLigar);
+                        }
+                        return false;
+                    }
+                });
+
                 break;
         }
         return super.onContextItemSelected(item);
