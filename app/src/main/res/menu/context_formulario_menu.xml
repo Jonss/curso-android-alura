@@ -12,8 +12,8 @@
 
     <item
         android:id="@+id/menu_share"
-        android:title="Share"
         android:actionProviderClass="android.widget.ShareActionProvider"
+        android:title="Share"
         />
     <item
         android:id="@+id/menu_ver_no_mapa"
@@ -22,6 +22,7 @@
     <item
         android:id="@+id/menu_enviar_sms"
         android:title="Enviar sms"/>
-    <item android:id="@+id/menu_ligar"
+    <item
+        android:id="@+id/menu_ligar"
         android:title="Ligar"/>
 </menu>

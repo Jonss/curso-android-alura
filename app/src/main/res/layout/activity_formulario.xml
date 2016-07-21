@@ -23,6 +23,7 @@
                 android:src="@drawable/person"/>
 
             <Button
+                android:id="@+id/formulario_camera_button"
                 android:layout_width="56dp"
                 android:layout_height="56dp"
                 android:layout_alignParentBottom="true"
