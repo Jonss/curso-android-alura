@@ -1,6 +1,8 @@
 package com.jonss.github.agenda;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -11,6 +13,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.jonss.github.agenda.dao.AlunoDao;
@@ -21,7 +24,9 @@ import java.io.File;
 
 public class FormularioActivity extends AppCompatActivity {
 
+    public static final int PHOTO_CODE = 123;
     private FormularioHelper mFormularioHelper;
+    private String caminhoFoto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,14 +46,26 @@ public class FormularioActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intentCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                String caminhoFoto = getExternalFilesDir(null) + "/ " + System.currentTimeMillis() + " .jpg";
+                caminhoFoto = getExternalFilesDir(null) + "/ " + System.currentTimeMillis() + " .jpg";
                 File file = new File(caminhoFoto);
                 intentCamera.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
-                startActivity(intentCamera);
+                startActivityForResult(intentCamera, PHOTO_CODE);
             }
         });
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            if (requestCode == PHOTO_CODE) {
+                ImageView image = (ImageView) findViewById(R.id.formulario_imagem);
+                Bitmap bitmap = BitmapFactory.decodeFile(caminhoFoto);
+                Bitmap scaledBitmap = bitmap.createScaledBitmap(bitmap, 300, 300, true);
+                image.setImageBitmap(scaledBitmap);
+                image.setScaleType(ImageView.ScaleType.FIT_XY);
+            }
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
