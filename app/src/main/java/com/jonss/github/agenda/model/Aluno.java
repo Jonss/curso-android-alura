@@ -10,6 +10,7 @@ public class Aluno implements Serializable{
     private String site;
     private String telefone;
     private Double mNota;
+    private String caminhoFoto;
 
     public Long getId() {
         return id;
@@ -64,4 +65,11 @@ public class Aluno implements Serializable{
         return id + " - " + nome;
     }
 
+    public String getCaminhoFoto() {
+        return caminhoFoto;
+    }
+
+    public void setCaminhoFoto(String caminhoFoto) {
+        this.caminhoFoto = caminhoFoto;
+    }
 }

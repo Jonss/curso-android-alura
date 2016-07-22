@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.jonss.github.agenda.model.Aluno;
 
@@ -32,15 +33,19 @@ public class AlunoDao extends SQLiteOpenHelper {
                 " endereco TEXT," +
                 "telefone TEXT," +
                 " site TEXT," +
+                " caminho_foto TEXT," +
                 " nota REAL)";
         db.execSQL(sql);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        String sql = "DROP TABLE IF EXISTS " + TABLE;
-        db.execSQL(sql);
-        onCreate(db);
+        String sql = "";
+        switch (oldVersion) {
+            case 1:
+                sql = "ALTER TABLE " + TABLE + " ADD COLUMN caminho_foto TEXT";
+                db.execSQL(sql);
+        }
     }
 
     public void create(Aluno aluno) {
@@ -60,6 +65,7 @@ public class AlunoDao extends SQLiteOpenHelper {
         values.put("telefone", aluno.getTelefone());
         values.put("site", aluno.getSite());
         values.put("nota", aluno.getNota());
+        values.put("caminho_foto", aluno.getCaminhoFoto());
         return values;
     }
 
@@ -76,7 +82,7 @@ public class AlunoDao extends SQLiteOpenHelper {
             aluno.setTelefone(cursor.getString(cursor.getColumnIndex("telefone")));
             aluno.setNota(cursor.getDouble(cursor.getColumnIndex("nota")));
             aluno.setSite(cursor.getString(cursor.getColumnIndex("site")));
-
+            aluno.setCaminhoFoto(cursor.getString(cursor.getColumnIndex("caminho_foto")));
             alunos.add(aluno);
         }
         cursor.close();
@@ -96,6 +102,8 @@ public class AlunoDao extends SQLiteOpenHelper {
 
         ContentValues values = getAlunoContentValues(aluno);
         String[] params = {aluno.getId().toString()};
+
+        Log.d("ALUNO DB", aluno.getCaminhoFoto());
 
         db.update(TABLE, values, "id = ?", params);
         this.close();
