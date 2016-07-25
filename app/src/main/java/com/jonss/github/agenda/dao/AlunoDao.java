@@ -19,7 +19,7 @@ import java.util.List;
 public class AlunoDao extends SQLiteOpenHelper {
 
     private static final String DATABASE = "Agenda";
-    private static final Integer VERSION = 1;
+    private static final Integer VERSION = 2;
     private static final String TABLE = "alunos";
 
     public AlunoDao(Context context) {
@@ -31,7 +31,7 @@ public class AlunoDao extends SQLiteOpenHelper {
         String sql = "CREATE TABLE " + TABLE + "(id INTEGER PRIMARY KEY," +
                 " nome TEXT NOT NULL," +
                 " endereco TEXT," +
-                "telefone TEXT," +
+                " telefone TEXT," +
                 " site TEXT," +
                 " caminho_foto TEXT," +
                 " nota REAL)";
