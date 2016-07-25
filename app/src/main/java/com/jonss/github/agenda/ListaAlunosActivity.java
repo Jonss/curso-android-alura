@@ -64,7 +64,7 @@ public class ListaAlunosActivity extends AppCompatActivity {
 
     private void carregaLista() {
         List<Aluno> alunos = alunoDao.getAll();
-        ArrayAdapter<Aluno> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, alunos);
+        AlunoAdapter adapter = new AlunoAdapter(this, alunos);
         listView.setAdapter(adapter);
     }
 
