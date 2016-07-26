@@ -43,8 +43,8 @@ public class AlunoDao extends SQLiteOpenHelper {
         String sql = "";
         switch (oldVersion) {
             case 1:
-                sql = "ALTER TABLE " + TABLE + " ADD COLUMN caminho_foto TEXT";
-                db.execSQL(sql);
+              //  sql = "ALTER TABLE " + TABLE + " ADD COLUMN caminho_foto TEXT";
+                //db.execSQL(sql);
         }
     }
 

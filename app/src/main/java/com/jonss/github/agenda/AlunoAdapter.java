@@ -1,13 +1,19 @@
 package com.jonss.github.agenda;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jonss.github.agenda.model.Aluno;
+
+import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -41,9 +47,31 @@ public class AlunoAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        TextView textView = new TextView(mContext);
         Aluno aluno = mAlunos.get(position);
-        textView.setText(aluno.toString());
-        return textView;
+
+        LayoutInflater inflater = LayoutInflater.from(mContext);
+
+        View view = convertView;
+        if(convertView == null) {
+             view = inflater.inflate(R.layout.lista_item, parent, false);
+        }
+
+        TextView campoNome = (TextView) view.findViewById(R.id.item_nome);
+        campoNome.setText(aluno.getNome());
+
+        TextView campoTelefone = (TextView) view.findViewById(R.id.item_telefone);
+        campoTelefone.setText(aluno.getTelefone());
+
+        ImageView campoFoto = (ImageView) view.findViewById(R.id.item_image);
+
+        String caminhoFoto = aluno.getCaminhoFoto();
+        if(caminhoFoto != null) {
+            Bitmap bitmap = BitmapFactory.decodeFile(caminhoFoto);
+            Bitmap scaledBitmap = bitmap.createScaledBitmap(bitmap, 100, 100, true);
+            campoFoto.setImageBitmap(scaledBitmap);
+            campoFoto.setScaleType(ImageView.ScaleType.FIT_XY);
+        }
+
+        return view;
     }
 }
