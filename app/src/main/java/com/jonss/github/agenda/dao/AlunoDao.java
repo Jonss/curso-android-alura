@@ -110,5 +110,14 @@ public class AlunoDao extends SQLiteOpenHelper {
     }
 
 
+    public boolean ehAluno(String telefone) {
+        SQLiteDatabase db = getReadableDatabase();
+
+        String[] params = {telefone};
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE + " WHERE telefone = ?", params);
+        int qtdAluno = cursor.getCount();
+        cursor.close();
+        return qtdAluno > 0;
+    }
 }
 
