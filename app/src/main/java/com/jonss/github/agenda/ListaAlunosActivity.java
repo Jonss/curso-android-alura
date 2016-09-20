@@ -8,7 +8,9 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.ContextMenu;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -17,6 +19,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.jonss.github.agenda.converter.AlunoConverter;
 import com.jonss.github.agenda.dao.AlunoDao;
 import com.jonss.github.agenda.model.Aluno;
 
@@ -130,6 +133,29 @@ public class ListaAlunosActivity extends AppCompatActivity {
         }
         return super.onContextItemSelected(item);
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.lista_alunos_menu, menu);
+        return true;
+    }
+
+        @Override
+        public boolean onOptionsItemSelected(MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.menu_enviar:
+
+                    List<Aluno> alunos = alunoDao.getAll();
+
+                    AlunoConverter converter = new AlunoConverter();
+                    String json = converter.converte(alunos);
+
+                    Log.d("Aluno json", json);
+                    Toast.makeText(this, json, Toast.LENGTH_SHORT).show();
+                    break;
+            }
+            return super.onOptionsItemSelected(item);
+        }
 
     @NonNull
     private Intent sendSiteFrom(Aluno aluno) {

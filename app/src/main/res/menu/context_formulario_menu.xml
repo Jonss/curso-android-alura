@@ -25,4 +25,5 @@
     <item
         android:id="@+id/menu_ligar"
         android:title="Ligar"/>
+
 </menu>
