@@ -153,6 +153,8 @@ public class ListaAlunosActivity extends AppCompatActivity {
                     Log.d("Aluno json", json);
                     Toast.makeText(this, json, Toast.LENGTH_SHORT).show();
                     break;
+                case R.id.menu_provas:
+                    startActivity(new Intent(this, ProvasActivity.class));
             }
             return super.onOptionsItemSelected(item);
         }
