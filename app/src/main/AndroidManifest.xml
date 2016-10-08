@@ -29,6 +29,8 @@
 
         <activity android:name=".ProvasActivity">
         </activity>
+        <activity android:name=".ProvaDetalhesActivity">
+        </activity>
     </application>
 
 </manifest>

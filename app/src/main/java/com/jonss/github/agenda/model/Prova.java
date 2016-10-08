@@ -1,11 +1,12 @@
 package com.jonss.github.agenda.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by neuromancer on 07/10/16.
  */
-public class Prova {
+public class Prova implements Serializable {
 
     private String materia;
     private String data;
