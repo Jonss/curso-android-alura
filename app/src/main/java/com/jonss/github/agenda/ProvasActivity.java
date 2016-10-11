@@ -15,6 +15,15 @@ public class ProvasActivity extends AppCompatActivity {
         FragmentManager manager = getFragmentManager();
         FragmentTransaction tx = manager.beginTransaction();
         tx.replace(R.id.frame_principal, new ListaProvasFragment());
+        if(isLandscape()) {
+            tx.replace(R.id.frame_secundario, new DetalhesProvaFragment());
+        }
         tx.commit();
+
+
+    }
+
+    private boolean isLandscape() {
+        return getResources().getBoolean(R.bool.modoPaisagem);
     }
 }
