@@ -1,6 +1,8 @@
 package com.jonss.github.agenda;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -44,9 +46,11 @@ public class ListaProvasFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Prova prova = (Prova) parent.getItemAtPosition(position);
                 Toast.makeText(getContext(), prova.getMateria(), Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getContext(), ProvaDetalhesActivity.class);
-                intent.putExtra("prova", prova);
-                startActivity(intent);
+
+                FragmentManager manager = getFragmentManager();
+                FragmentTransaction tx = manager.beginTransaction();
+                tx.replace(R.id.frame_principal, new DetalhesProvaFragment());
+                tx.commit();
             }
         });
 
