@@ -3,14 +3,11 @@ package com.jonss.github.agenda;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.jonss.github.agenda.model.Prova;
-
-import java.io.Serializable;
 
 public class ProvaDetalhesActivity extends AppCompatActivity {
 
@@ -30,7 +27,7 @@ public class ProvaDetalhesActivity extends AppCompatActivity {
         dataText.setText(prova.getData());
 
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, prova.getAssuntos());
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, prova.getTopicos());
         lista.setAdapter(adapter);
 
     }

@@ -1,5 +1,6 @@
 package com.jonss.github.agenda;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -47,10 +48,8 @@ public class ListaProvasFragment extends Fragment {
                 Prova prova = (Prova) parent.getItemAtPosition(position);
                 Toast.makeText(getContext(), prova.getMateria(), Toast.LENGTH_SHORT).show();
 
-                FragmentManager manager = getFragmentManager();
-                FragmentTransaction tx = manager.beginTransaction();
-                tx.replace(R.id.frame_principal, new DetalhesProvaFragment());
-                tx.commit();
+                ProvasActivity activity = (ProvasActivity) getActivity();
+                activity.selecionaProva(prova);
             }
         });
 

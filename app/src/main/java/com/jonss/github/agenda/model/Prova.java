@@ -27,7 +27,7 @@ public class Prova implements Serializable {
         return data;
     }
 
-    public List<String> getAssuntos() {
+    public List<String> getTopicos() {
         return assuntos;
     }
 
