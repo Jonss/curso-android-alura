@@ -1,10 +1,9 @@
 package com.jonss.github.agenda;
 
-import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 import com.jonss.github.agenda.model.Prova;
 
@@ -22,8 +21,6 @@ public class ProvasActivity extends AppCompatActivity {
             tx.replace(R.id.frame_secundario, new DetalhesProvaFragment());
         }
         tx.commit();
-
-
     }
 
     private boolean isLandscape() {
@@ -39,6 +36,7 @@ public class ProvasActivity extends AppCompatActivity {
             params.putSerializable("prova", prova);
             detalhesfragment.setArguments(params);
             tx.replace(R.id.frame_principal, detalhesfragment);
+            tx.addToBackStack(null);
             tx.commit();
         } else {
             DetalhesProvaFragment detalhesFragment =
